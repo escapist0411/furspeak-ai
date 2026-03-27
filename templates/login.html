@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login - FurSpeak</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="auth">
+
+<div class="auth-card">
+
+<h2>Login</h2>
+
+<form method="POST">
+
+<input type="email" name="email" placeholder="Email">
+
+<input type="password" name="password" placeholder="Password">
+
+<button type="submit">Login</button>
+
+</form>
+
+<p>Don't have account? <a href="/signup">Signup</a></p>
+
+</div>
+
+</body>
+</html>

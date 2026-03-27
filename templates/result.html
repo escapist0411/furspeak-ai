@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FurSpeak Result</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<script>
+
+let countdown = 10;
+
+function startRedirect(){
+
+const timer = setInterval(()=>{
+
+countdown--;
+document.getElementById("timer").innerText = countdown;
+
+if(countdown<=0){
+
+clearInterval(timer);
+window.location.href="/dashboard";
+
+}
+
+},1000)
+
+}
+
+window.onload = startRedirect;
+
+</script>
+
+</head>
+
+<body>
+
+<div class="result-container">
+
+<div class="result-card">
+
+<h1 class="emoji">{{ emoji }}</h1>
+
+<h2 class="emotion">{{ mood }}</h2>
+
+<p class="file-name">Analyzed File: {{ filename }}</p>
+
+
+<!-- CONFIDENCE BAR -->
+
+<div class="confidence-box">
+
+<div class="confidence-label">
+Confidence {{ confidence }}%
+</div>
+
+<div class="progress-container">
+
+<div
+class="progress-bar animated"
+style="width: {{ confidence }}%;">
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- AI INTERPRETATION -->
+
+<div class="ai-explanation">
+
+<h3>🧠 AI Interpretation</h3>
+
+<p>
+
+{% if mood == "Happy" %}
+Your dog appears excited or playful. This usually happens when dogs greet their owners, anticipate playtime, or express joy.
+
+{% elif mood == "Angry" %}
+The sound pattern suggests defensive or aggressive behavior. Your dog might be alerting you to something unfamiliar or protecting its territory.
+
+{% elif mood == "Sad" %}
+The bark tone indicates low emotional energy. Dogs usually produce this sound when feeling lonely or seeking attention.
+
+{% elif mood == "Hungry" %}
+The bark pattern suggests a request for food. Dogs commonly vocalize this way when they are hungry or expecting feeding time.
+
+{% endif %}
+
+</p>
+
+</div>
+
+
+<!-- REDIRECT TIMER -->
+
+<p class="redirect-text">
+Returning to dashboard in <b><span id="timer">10</span></b> seconds...
+</p>
+
+
+<!-- RETRY BUTTON -->
+
+<a href="/" class="try-again-btn">
+🔄 Retry Analyze
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="analytics-container">
+
+<h1 class="analytics-title">📊 Emotion Analytics</h1>
+<p class="analytics-subtitle">
+Insights from analyzed sounds
+</p>
+
+
+<!-- 🔥 ANIMAL TOGGLE -->
+
+<div class="animal-toggle">
+
+<a href="/analytics?animal=dog"
+class="animal-btn {% if selected_animal == 'dog' %}active{% endif %}">
+🐶 Dog
+</a>
+
+<a href="/analytics?animal=cat"
+class="animal-btn {% if selected_animal == 'cat' %}active{% endif %}">
+🐱 Cat
+</a>
+
+</div>
+
+
+<!-- STAT CARDS -->
+
+<div class="analytics-stats">
+
+<div class="stat-box">
+<h3>Total</h3>
+<p>{{ happy + angry + sad + hungry }}</p>
+</div>
+
+<div class="stat-box happy">
+<h3>Happy</h3>
+<p>{{ happy }}</p>
+</div>
+
+<div class="stat-box sad">
+<h3>Sad</h3>
+<p>{{ sad }}</p>
+</div>
+
+<div class="stat-box angry">
+<h3>Angry</h3>
+<p>{{ angry }}</p>
+</div>
+
+</div>
+
+
+<!-- CHART CARD -->
+
+<div class="chart-card">
+
+<h2>
+Emotion Distribution 
+{% if selected_animal == "dog" %} 🐶 {% else %} 🐱 {% endif %}
+</h2>
+
+<canvas id="emotionChart"></canvas>
+
+</div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx = document.getElementById("emotionChart");
+
+new Chart(ctx, {
+
+type: "doughnut",
+
+data: {
+labels: ["Happy", "Angry", "Sad", "Hungry"],
+
+datasets: [{
+data: [
+{{ happy | default(0) }},
+{{ angry | default(0) }},
+{{ sad | default(0) }},
+{{ hungry | default(0) }}
+],
+
+backgroundColor: [
+"#4CAF50",
+"#FF5722",
+"#2196F3",
+"#FFC107"
+],
+
+borderWidth: 0
+}]
+
+},
+
+options: {
+
+plugins:{
+legend:{
+labels:{
+color:"#ddd",
+font:{size:14}
+}
+}
+},
+
+cutout:"60%"
+
+}
+
+});
+
+</script>
+
+{% endblock %}

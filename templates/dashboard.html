@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="hero">
+
+    <h1>Welcome {{ name }} 👋</h1>
+    <p>Understand what your animal is trying to say using AI.</p>
+
+</div>
+
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <h3>Total Sounds</h3>
+        <p>{{ total }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Happy</h3>
+        <p>{{ happy }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Sad</h3>
+        <p>{{ sad }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Angry</h3>
+        <p>{{ angry }}</p>
+    </div>
+
+</div>
+
+
+<div class="quick-actions">
+
+    <a href="/" class="action-btn">
+        🎤 Analyze Animal Sound
+    </a>
+
+    <a href="/history" class="action-btn secondary">
+        📜 View History
+    </a>
+
+</div>
+
+{% endblock %}

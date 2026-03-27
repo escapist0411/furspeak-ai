@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="history-container">
+
+<h1 class="history-title">📜 Analysis History</h1>
+
+<!-- FILTERS -->
+
+<div class="history-filters">
+
+<select id="moodFilter">
+<option value="all">All Emotions</option>
+<option value="Happy">Happy</option>
+<option value="Angry">Angry</option>
+<option value="Sad">Sad</option>
+<option value="Hungry">Hungry</option>
+</select>
+
+<input type="date" id="dateFilter">
+
+</div>
+
+
+<!-- TABLE -->
+
+<div class="history-card">
+
+<table id="historyTable">
+
+<thead>
+<tr>
+<th>File</th>
+<th>Emotion</th>
+<th>Confidence</th>
+<th>Date</th>
+<th>Animal</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for row in data %}
+
+<tr 
+data-mood="{{ row.mood }}" 
+data-date="{{ row.date }}"
+data-animal="{{ row.animal | default('dog') }}"
+>
+
+<td>{{ row.filename }}</td>
+
+<td>
+<span class="emotion-badge {{ row.mood | lower }}">
+{% if row.mood == "Happy" %}
+😊
+{% elif row.mood == "Angry" %}
+😡
+{% elif row.mood == "Sad" %}
+😢
+{% elif row.mood == "Hungry" %}
+🍖
+{% endif %}
+{{ row.mood }}
+</span>
+</td>
+
+<td>
+
+<div class="mini-progress">
+
+<div class="mini-bar"
+style="width: {{ row.confidence }}%;">
+</div>
+
+<span>{{ row.confidence }}%</span>
+
+</div>
+
+</td>
+
+<td>{{ row.date }}</td>
+
+<td>
+{% if row.animal == "cat" %}
+🐱 Cat
+{% else %}
+🐶 Dog
+{% endif %}
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+
+
+<script>
+
+const moodFilter = document.getElementById("moodFilter");
+const dateFilter = document.getElementById("dateFilter");
+const rows = document.querySelectorAll("#historyTable tbody tr");
+
+function filterTable(){
+
+const mood = moodFilter.value;
+const date = dateFilter.value;
+
+rows.forEach(row=>{
+
+const rowMood = row.dataset.mood;
+const rowDate = row.dataset.date;
+
+let show = true;
+
+if(mood !== "all" && rowMood !== mood){
+show = false;
+}
+
+if(date && !rowDate.startsWith(date)){
+show = false;
+}
+
+row.style.display = show ? "" : "none";
+
+});
+
+}
+
+moodFilter.addEventListener("change", filterTable);
+dateFilter.addEventListener("change", filterTable);
+
+</script>
+
+{% endblock %}

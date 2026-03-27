@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🐾FurSpeak</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<div class="analyzer-container">
+
+<div class="analyzer-card">
+
+<h1>🐾FurSpeak</h1>
+<p class="subtitle">AI powered animal emotion analyzer</p>
+
+
+<form method="POST" enctype="multipart/form-data" id="analyzeForm">
+
+<!-- Hidden file input -->
+<input type="file" id="audio" name="audio" accept=".wav,.mp3" hidden required>
+
+<div class="animal-toggle">
+
+<button type="button" class="animal-btn active" onclick="setAnimal('dog')">
+🐶 Dog
+</button>
+
+<button type="button" class="animal-btn" onclick="setAnimal('cat')">
+🐱 Cat
+</button>
+
+<input type="hidden" name="animal" id="animalInput" value="dog">
+
+</div>
+<!-- Upload Box -->
+
+<label for="audio" class="upload-area">
+
+<div class="upload-icon">📂</div>
+
+<p>Drag & Drop Dog Audio</p>
+<span>or click to upload</span>
+
+</label>
+
+
+<!-- File Name -->
+
+<p id="file-name">No file selected</p>
+
+
+<!-- Audio Preview -->
+
+<audio id="audioPreview" controls style="display:none;"></audio>
+
+
+<!-- Buttons -->
+
+<div class="button-group">
+
+<button type="button" class="mic-btn">
+🎤 Record
+</button>
+
+<button type="submit" class="analyze-btn">
+Analyze Emotion
+</button>
+
+</div>
+
+
+<!-- Loader -->
+
+<div id="loading" class="loader">
+<div class="spinner"></div>
+<p>Analyzing Bark... 🐾</p>
+</div>
+
+
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+
+</form>
+
+</div>
+
+</div>
+
+
+<script>
+
+const input = document.getElementById("audio");
+const fileName = document.getElementById("file-name");
+const preview = document.getElementById("audioPreview");
+const loading = document.getElementById("loading");
+const form = document.getElementById("analyzeForm");
+
+input.addEventListener("change", () => {
+
+if(input.files[0]){
+
+fileName.textContent = "Selected: " + input.files[0].name;
+
+preview.src = URL.createObjectURL(input.files[0]);
+preview.style.display = "block";
+
+}else{
+
+fileName.textContent = "No file selected";
+preview.style.display = "none";
+
+}
+
+});
+
+
+form.addEventListener("submit", () => {
+
+loading.style.display = "block";
+
+});
+
+</script>
+<script>
+
+function setAnimal(type){
+
+document.getElementById("animalInput").value = type;
+
+document.querySelectorAll(".animal-btn").forEach(btn=>{
+    btn.classList.remove("active");
+});
+
+event.target.classList.add("active");
+
+}
+
+</script>
+</body>
+</html>

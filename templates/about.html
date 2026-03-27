@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="about-container">
+
+<h1 class="about-title">🐶 FurSpeak AI</h1>
+
+<p class="about-tagline">
+Understanding animal emotions through <span>Artificial Intelligence</span> 🧠
+</p>
+
+
+<!-- INTRO -->
+
+<div class="about-card">
+
+<h2>📌 Project Overview</h2>
+
+<p>
+FurSpeak is an <span class="highlight">AI-powered emotion detection system</span> 
+designed to analyze animal sounds and interpret their emotional state.
+
+The system processes <span class="highlight">audio signals</span> and classifies them into emotions such as 
+<span class="emotion happy">Happy</span>, 
+<span class="emotion angry">Angry</span>, 
+<span class="emotion sad">Sad</span>, and 
+<span class="emotion hungry">Hungry</span>.
+</p>
+
+</div>
+
+
+<!-- HOW IT WORKS -->
+
+<div class="about-card">
+
+<h2>⚙️ How It Works</h2>
+
+<ul>
+<li>Audio input is captured or uploaded by the user</li>
+<li><span class="highlight">MFCC features</span> are extracted using Librosa</li>
+<li>A trained <span class="highlight">Machine Learning model (SVM)</span> processes the features</li>
+<li>The system predicts the <span class="highlight">emotional state</span></li>
+</ul>
+
+</div>
+
+
+
+
+{% endblock %}

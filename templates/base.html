@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<title>FurSpeak AI</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<link rel="icon" href="{{ url_for('static', filename='logo.png') }}">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+<div class="nav-wrapper">
+
+<!-- LEFT -->
+
+<div class="nav-left">
+<a href="/dashboard" class="logo">
+🐾 FurSpeak
+</a>
+</div>
+
+
+<!-- CENTER -->
+
+<div class="nav-center">
+
+<a href="/dashboard">🏠 Dashboard</a>
+
+<a href="/">🎤 Analyze</a>
+
+<a href="/history">📜 History</a>
+
+<a href="/analytics">📊 Analytics</a>
+
+<a href="/about">📘 About</a>
+
+</div>
+
+
+<!-- RIGHT -->
+
+<div class="nav-right">
+
+<a href="/profile" class="profile-chip">
+👤 {{ session["name"] }}
+</a>
+
+<a href="/logout" class="logout-btn">
+Logout
+</a>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<!-- PAGE CONTENT -->
+
+<div class="container">
+{% block content %}{% endblock %}
+</div>
+
+
+
+
+</body>
+</html>
