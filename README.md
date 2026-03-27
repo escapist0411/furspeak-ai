@@ -30,4 +30,4 @@ AI-based Dog & Cat Emotion Detection System using Machine Learning.
 
 ---
 
-Made by Prathamesh Munavali 🚀
+Made by Shreyas Sadavarte 🚀
